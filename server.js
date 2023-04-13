@@ -6,7 +6,9 @@ require("dotenv").config();
 const morgan = require("morgan");
 const cors = require('cors');
 //const { readdirSync } = require("fs")
-const { readdirSync } = require("fs")
+const { readdirSync } = require('fs');
+
+//const routes= require('./routes/auth');
 
 
 // middlewares
@@ -21,8 +23,8 @@ app.use(cors());
 
 mongoose.connect(process.env.DATABASE).then(() => console.log("DB connected"))
 .catch((err) => console.log("DB Errorrrr => ", err));
-
-//readdirSync("./routes").map(r => app.use("/api/v1", require(`./routes/${r}`)))
+//app.use('api/v',routes)
+readdirSync("./routes").map(r => app.use("/api/v1", require(`./routes/${r}`)))
 const port = process.env.PORT || 8000;
 
 app.listen(port, () => {
